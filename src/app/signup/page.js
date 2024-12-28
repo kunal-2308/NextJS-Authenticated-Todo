@@ -5,12 +5,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
-   let router = useRouter();
+  let router = useRouter();
 
   let [user, setUser] = useState({
-    email: "",
-    password: "",
-    userName: "",
+    userName:"",
+    password:"",
+    email:""
   });
 
   const handleChange = (e) => {
@@ -18,11 +18,12 @@ export default function Signup() {
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-   //  let response = await axios.post('/api/signup',user);
-    router.push('/login');
+      let response = await axios.post("/api/users/signup", user);
+      console.log(response);
+      router.push("/login");
     } catch (error) {
       console.log(error.message);
     }
@@ -31,10 +32,15 @@ export default function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-200">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">Sign Up</h1>
+        <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">
+          Sign Up
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -49,7 +55,10 @@ export default function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -64,7 +73,10 @@ export default function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input

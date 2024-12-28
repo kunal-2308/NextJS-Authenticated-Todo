@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export default connectDb = async() =>{
+const connectDb = async() =>{
     try {
         let connect = await mongoose.connect(process.env.MONGO_URL);
         if(connect){
@@ -10,3 +10,5 @@ export default connectDb = async() =>{
         console.log(error.message);
     }
 }
+
+export default connectDb;
