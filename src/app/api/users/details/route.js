@@ -12,7 +12,6 @@ export const GET = async (request) => {
 
     let user = await User.findById(_id);
 
-    console.log(user);
     return NextResponse.json({
         message:"User details fetched successfully",
         user
