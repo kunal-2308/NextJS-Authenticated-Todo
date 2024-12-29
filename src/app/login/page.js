@@ -1,7 +1,10 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  let router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -12,9 +15,15 @@ export default function Login() {
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("User Data:", user);
+  const handleSubmit = async(e) => {
+    try {
+      e.preventDefault();
+      let response = await axios.post('/api/users/login',user);
+      console.log(response);
+     router.push(`/list/${response.data.user._id}`);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
